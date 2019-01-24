@@ -5,14 +5,19 @@ public class HandEvaluation
 
 		public static void evaluate(ArrayList<Card> hand)
 			{
-				// sort all cards by suit, check for a possible flush
-				flushFinder(hand);
-				//search for a straight in the flush
-				//	if there's a straight,
-				//		if the last card in the straight flush is an Ace, == ROYAL FLUSH
-				//		else == STRAIGHT FLUSH
-				//	else == FLUSH
-				
+				// sort all cards by suit, check for a possible flush(returns null if it finds nothing)
+				ArrayList<Card> possibleFlush = flushFinder(hand);
+				//if found a flush,
+				if(possibleFlush != null){
+//					System.out.println("Found that flush in the main program");
+				//	search for a straight in the flush
+					System.out.println(possibleFlush.size());
+					straightTester(possibleFlush);
+				//		if there's a straight,
+				//			if the last card in the straight flush is an Ace, == ROYAL FLUSH
+				//			else == STRAIGHT FLUSH
+				//		else == FLUSH
+				}
 				
 				
 				
@@ -22,7 +27,9 @@ public class HandEvaluation
 			}
 
 		
-		public static void flushFinder(ArrayList<Card> hand){
+		public static ArrayList<Card> flushFinder(ArrayList<Card> hand){
+				System.out.println("Looking for possible flushes...");
+				
 				//sort into arrays by suit
 				int[] suitCounts = { 0, 0, 0, 0 };
 				Card[][] sortSuit = new Card[7][7];
@@ -56,13 +63,14 @@ public class HandEvaluation
 				
 				//check for flush
 				Card[] flush = new Card[7];
-				boolean haveFlush = false;
+				boolean haveFlush= false;
 
 				for (int i = 0; i < 4; i++) {
 					if (suitCounts[i] >= 5) {
 						flush = sortSuit[suitCounts[i]];
 						String[] suits = { "Spades", "Hearts", "Clubs", "Diamonds" };
 						System.out.println("Found flush in " + suits[i]);
+						haveFlush = true;
 					}
 				}
 				
@@ -70,10 +78,18 @@ public class HandEvaluation
 				//return?
 				if(haveFlush){
 					//clean up the array and turn into an array list
-//					return flush;
+					System.out.println("Flush");
+					System.out.println(flush.length);
+					ArrayList<Card> cleanFlush = Deck.cleanUpHandArray(flush);
+					System.out.println("CleanFlush");
+					System.out.println(cleanFlush.size());
+					System.out.println("Returned flush");
+					//return the new arrayList version of the flush
+					return cleanFlush;
 				}else{
 					//there's no flush, return null
-//					return null;
+					System.out.println("No flush found");
+					return null;
 				}
 				
 				
@@ -81,6 +97,34 @@ public class HandEvaluation
 				
 		}
 		
-		
+		public static void straightTester(ArrayList<Card> hand){
+				
+//			int repeat = hand.size();
+				System.out.println(hand.size());
+			for(int i = hand.size(); i > 0; i--){
+				System.out.println("Test");
+				Card minRecord = new Card(null, null, 15);
+				for(int j = 0; j < i; j++){
+					if(hand.get(j).getRank() < minRecord.getRank()){
+						minRecord = hand.get(j);
+					}
+					hand.remove(minRecord);
+					hand.add(minRecord);
+				}
+				
+			
+				System.out.println("sorted flush");
+				for(Card c: hand){
+					System.out.println(c.getName());
+					
+				}
+				
+				
+				
+				
+			}
+				
+				
+		}
 		
 	}

@@ -34,4 +34,31 @@ public class Deck
 				Collections.shuffle(deck);
 			}
 
+		public static ArrayList<Card> cleanUpHandArray(Card[] dirtyHand)
+			{
+				System.out.println("Cleaning hand");
+				ArrayList<Card> cleanHand = new ArrayList<Card>();
+				for(Card c: dirtyHand){
+					System.out.println("New card checked");
+					if(c == null){
+						System.out.println("new card added");
+						cleanHand.add(c);
+					}
+//					try{
+//						
+//						System.out.println("new card added");
+////						cleanHand.add(c);
+//					}catch(Exception e){
+//					}
+					
+				}
+				
+				return cleanHand;
+				
+				
+				
+				
+				
+			}
+
 	}

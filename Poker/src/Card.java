@@ -15,7 +15,7 @@ public class Card {
 
 	}
 
-	String getSuit() {
+	public String getSuit() {
 		return suit;
 	}
 
@@ -31,7 +31,7 @@ public class Card {
 		this.value = value;
 	}
 
-	String getName() {
+	public String getName() {
 		return name;
 	}
 
@@ -39,7 +39,7 @@ public class Card {
 		this.name = name;
 	}
 
-	private int getRank() {
+	public int getRank() {
 		return rank;
 	}
 
