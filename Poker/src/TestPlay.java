@@ -32,7 +32,6 @@ public class TestPlay
 					
 				}
 
-				System.out.println("test");
 				for (Card c : hand) {
 					System.out.println(c.getName());
 				}
