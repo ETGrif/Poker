@@ -12,7 +12,9 @@ public class TestPlay
 				ArrayList<Card> hand = new ArrayList<Card>();
 
 				//straight flush test set
-				String[] getHand = {"Three of Spades", "Six of Spades" ,"Five of Clubs","Four of Spades","Nine of Spades","Two of Spades","Queen of Hearts"};
+//				String[] getHand = {"Three of Spades", "Six of Spades" ,"Five of Spades","Four of Spades","Nine of Spades","Two of Spades","Queen of Hearts"};
+				String[] getHand = {"Ten of Spades", "Jack of Spades" ,"King of Spades","Two of Clubs","Queen of Spades","Four of Hearts","Ace of Spades"};
+
 				
 //				for (int i = 0; i < 7; i++) {
 //					hand.add(deck.get(0));
@@ -32,9 +34,11 @@ public class TestPlay
 					
 				}
 
+				System.out.println("Cards recieved:");
 				for (Card c : hand) {
 					System.out.println(c.getName());
 				}
+				System.out.println("\n\n");
 
 				HandEvaluation.evaluate(hand);
 			}
