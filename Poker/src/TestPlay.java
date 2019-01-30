@@ -13,7 +13,11 @@ public class TestPlay
 
 				//straight flush test set
 //				String[] getHand = {"Three of Spades", "Six of Spades" ,"Five of Spades","Four of Spades","Nine of Spades","Two of Spades","Queen of Hearts"};
-				String[] getHand = {"Ten of Spades", "Jack of Spades" ,"King of Spades","Two of Clubs","Queen of Spades","Four of Hearts","Ace of Spades"};
+//				String[] getHand = {"Ten of Spades", "Jack of Spades" ,"King of Spades","Two of Clubs","Queen of Spades","Four of Hearts","Ace of Spades"};
+				
+				//four of a kind and full house test set
+				String[] getHand = {"Ace of Spades", "Five of Clubs" ,"Four of Spades","Five of Spades","Five of Diamonds","Four of Clubs","Five of Hearts"};
+
 
 				
 //				for (int i = 0; i < 7; i++) {

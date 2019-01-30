@@ -6,6 +6,8 @@ public class HandEvaluation
 
 		public static void evaluate(ArrayList<Card> hand)
 			{
+				
+				//ROYAL FLUSH, STRAIGHT FLUSH, and FLUSH
 				String found = null;
 				// sort all cards by suit, check for a possible flush(returns
 				// null if it finds nothing)
@@ -31,10 +33,29 @@ public class HandEvaluation
 					}
 				}
 
-				//if nothing has been found yet, search for 
+				
+				//FOUR OF A KIND
+				// if nothing has been found yet, search for pairs
+				if (found == null) {
+					int[] pairCounts = pairFinder(hand);
+					// see if theres a four of a kind
+					for (int i = 0; i < 7; i++) {
+						if (pairCounts[i] == 4) {
+							found = "Four of a Kind";
+
+						}
+					}
+					
+				
+					
+					
+					
+					
+					
+				}
 				
 				
-				
+			System.out.println(found);	
 			}
 
 		public static ArrayList<Card> flushFinder(ArrayList<Card> hand)
@@ -43,7 +64,7 @@ public class HandEvaluation
 
 				// sort into arrays by suit
 				int[] suitCounts = { 0, 0, 0, 0 };
-				Card[][] sortSuit = new Card[7][7];
+				Card[][] sortSuit = new Card[hand.size()][hand.size()];
 				for (Card c : hand) {
 					String suit = c.getSuit();
 					int s = 0;
@@ -72,7 +93,7 @@ public class HandEvaluation
 //				System.out.println("Diamonds:" + suitCounts[3]);
 
 				// check for flush
-				Card[] flush = new Card[7];
+				Card[] flush = new Card[hand.size()];
 				boolean haveFlush = false;
 
 				for (int i = 0; i < 4; i++) {
@@ -191,4 +212,34 @@ public class HandEvaluation
 
 			}
 
+		public static int[] pairFinder(ArrayList<Card> hand){
+				//sort the hand
+				Collections.sort(hand, new CardValueSorter());	
+				
+				//find pairs
+				int previousRank = -1;
+				int pointer = -1;
+				int[] pairCounts = { 0, 0, 0, 0, 0, 0, 0};
+//				Card[][] sortPairs = new Card[hand.size()][4];
+				
+				//sort into 2D array like the flushFinder
+				for(int i = 0; i < hand.size(); i++){
+					Card c = hand.get(i);
+					if(c.getRank() > previousRank){
+						pointer++;
+						previousRank = c.getRank();
+					}
+//					sortPairs[pointer][pairCounts[pointer]] = c;
+					pairCounts[pointer]++;
+				}
+				
+				return pairCounts;
+				
+				
+				
+				
+		}
+		
+		
+		
 	}
