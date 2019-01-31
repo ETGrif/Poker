@@ -7,8 +7,12 @@ public class HandEvaluation
 		public static void evaluate(ArrayList<Card> hand)
 			{
 				
-				//ROYAL FLUSH, STRAIGHT FLUSH, and FLUSH
 				String found = null;
+				ArrayList<Card> foundCards = new ArrayList<Card>();
+				
+				
+				//ROYAL FLUSH, STRAIGHT FLUSH, and FLUSH
+				
 				// sort all cards by suit, check for a possible flush(returns
 				// null if it finds nothing)
 				ArrayList<Card> possibleFlush = flushFinder(hand);
@@ -22,13 +26,16 @@ public class HandEvaluation
 						if (straight.get(4).getRank() == 14) {
 					// --------ROYAL FLUSH
 							found = "Royal Flush";
+							foundCards = straight;
 						} else {
 					// ------else == STRAIGHT FLUSH
 							found = "Straight Flush";
+							foundCards = straight;
 						}
 					} else {
 					// --else == FLUSH
 						found = "Flush";
+						foundCards = possibleFlush;
 
 					}
 				}
@@ -54,8 +61,11 @@ public class HandEvaluation
 					
 				}
 				
-				
-			System.out.println(found);	
+				System.out.println("\n\n");
+				System.out.println(found);
+				for (Card c : foundCards) {
+					System.out.println(c.getName());
+			}
 			}
 
 		public static ArrayList<Card> flushFinder(ArrayList<Card> hand)
@@ -220,7 +230,7 @@ public class HandEvaluation
 				int previousRank = -1;
 				int pointer = -1;
 				int[] pairCounts = { 0, 0, 0, 0, 0, 0, 0};
-//				Card[][] sortPairs = new Card[hand.size()][4];
+				Card[][] sortPairs = new Card[hand.size()][4];
 				
 				//sort into 2D array like the flushFinder
 				for(int i = 0; i < hand.size(); i++){
@@ -229,9 +239,45 @@ public class HandEvaluation
 						pointer++;
 						previousRank = c.getRank();
 					}
-//					sortPairs[pointer][pairCounts[pointer]] = c;
+					sortPairs[pointer][pairCounts[pointer]] = c;
 					pairCounts[pointer]++;
 				}
+				
+				
+				//clean up the array(that way it can encode some more info
+				
+				//set up the clean board
+				int finalSpot = pointer + pairCounts[pointer];
+				System.out.println(finalSpot);
+				Card[][] cleanPairs = new Card[finalSpot][];
+				for(int i = 0; i > finalSpot; i++){
+					cleanPairs[i] = new Card[pairCounts[i]]; 
+				}
+				
+				//fill the board
+				for(int y = 0; y < sortPairs.length; y++){
+					int index = 0;
+					for(int x = 0; x < sortPairs[y].length; x++){
+						if(sortPairs[x][y] != null){
+							cleanPairs[x][y] = sortPairs[x][y];
+							
+						}
+						
+					}
+					
+				}
+				
+				
+				for(Card[] a : cleanPairs){
+					System.out.println("New Pair");
+					for(Card c : a){
+					System.out.println(c.getName());	
+					
+					}
+					
+				}
+				
+				
 				
 				return pairCounts;
 				

@@ -16,7 +16,8 @@ public class TestPlay
 //				String[] getHand = {"Ten of Spades", "Jack of Spades" ,"King of Spades","Two of Clubs","Queen of Spades","Four of Hearts","Ace of Spades"};
 				
 				//four of a kind and full house test set
-				String[] getHand = {"Ace of Spades", "Five of Clubs" ,"Four of Spades","Five of Spades","Five of Diamonds","Four of Clubs","Five of Hearts"};
+//				String[] getHand = {"Ace of Spades", "Five of Clubs" ,"Four of Spades","Five of Spades","Five of Diamonds","Four of Clubs","Five of Hearts"};
+				String[] getHand = {"Ace of Spades", "Two of Clubs" ,"Four of Spades","Five of Spades","Four of Diamonds","Four of Clubs","Six of Hearts"};
 
 
 				
