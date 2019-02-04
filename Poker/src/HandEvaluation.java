@@ -18,7 +18,7 @@ public class HandEvaluation
 				// if found a flush,
 				if (possibleFlush != null) {
 					// search for a straight in the flush
-					ArrayList<Card> straight = straightTester(possibleFlush);
+					ArrayList<Card> straight = straightFinder(possibleFlush);
 					// --if there's a straight,
 					if (straight != null) {
 						// if the last card in the straight flush is an Ace, ==
@@ -34,6 +34,13 @@ public class HandEvaluation
 					} else {
 						// --else == FLUSH
 						found = "Flush";
+						if (possibleFlush.size() > 5) {
+							// if there are 5+ cards, limit it to five
+							int difference = possibleFlush.size() - 5;
+							for (int i = 0; i < difference; i++) {
+								possibleFlush.remove(0);
+							}
+						}
 						foundCards = possibleFlush;
 
 					}
@@ -72,17 +79,108 @@ public class HandEvaluation
 				}
 				
 				
-				
-				
-				
-				
 				// FULL HOUSE
-				if(found == null){
-					//find the highest pair of two
-					//find the highest pair of three
-					//if there is one of both, return the cards and FULL HOUSE
+				if (found == null) {
+					// find the highest pair of two and of three(got index)
+					int highestPair = -1;
+					int highestPair2 = -1;
+					for (int i = 0; i < pairCounts.length; i++) {
+						if (pairCounts[i] == 2) {
+							highestPair = i;
+						} else if (pairCounts[i] == 3) {
+							highestPair2 = i;
+						}
+					}
+					
+					// if there is one of both, return the cards and FULL HOUSE
+					if(highestPair != -1 && highestPair2 != -1){
+						found = "Full House";
+						foundCards = addArrays(arrayToArrayList(pairs[highestPair]), arrayToArrayList(pairs[highestPair2]));
+					}
 					
 				}
+
+				// STRAIGHT
+				if (found == null) {
+					ArrayList<Card> straight = straightFinder(hand);
+					if (straight != null) {
+						found = "Straight";
+						foundCards = straight;
+
+					}
+
+				}	
+					
+				
+				
+				// THREE OF A KIND
+				if (found == null) {
+					int highestPair = -1;
+					for (int i = 0; i < pairCounts.length; i++) {
+						if (pairCounts[i] == 3) {
+							highestPair = i;
+						}
+
+					}
+					if (highestPair != -1) {
+						found = "Three of a Kind";
+						foundCards = arrayToArrayList(pairs[highestPair]);
+
+					}
+
+				}				
+				
+				
+				
+				
+				//TWO PAIRS and PAIR
+				if (found == null) {
+
+					int highestPair = -1;
+					int highestPair2 = -1;
+					for (int i = 0; i < pairCounts.length; i++) {
+						if (pairCounts[i] == 2) {
+							highestPair2 = highestPair;
+							highestPair = i;
+						}
+
+					}
+
+					if (highestPair2 != -1) {
+						found = "Two Pair";
+						foundCards = addArrays(arrayToArrayList(pairs[highestPair2]),
+								arrayToArrayList(pairs[highestPair]));
+
+					} else if (highestPair != -1) {
+						found = "Pair";
+						foundCards = arrayToArrayList(pairs[highestPair]);
+
+					}
+
+				}
+				
+				
+				//HIGH CARD
+				if(found == null){
+					//find highest card
+					int record = -1;
+					int pointer = -1;
+					for(int i = 0; i < hand.size(); i++){
+						if(hand.get(i).getRank() > record){
+						record = hand.get(i).getRank();
+						pointer = i;
+						}
+					}
+					
+					found = "High Card";
+					foundCards.add(hand.get(pointer));
+					
+					
+					
+					
+					
+				}
+				
 				
 				
 				
@@ -159,19 +257,19 @@ public class HandEvaluation
 
 			}
 
-		public static ArrayList<Card> straightTester(ArrayList<Card> hand)
+		public static ArrayList<Card> straightFinder(ArrayList<Card> hand)
 			{
 
 				// sort the flush
 				Collections.sort(hand, new CardValueSorter());
 
-				// System.out.println("sorted flush");
-				// for (Card c : hand) {
-				// System.out.println(c.getName());
-				//
-				// }
-
 				// (remove duplicate cards)
+				for (int i = hand.size() - 1; i > 0; i--) {
+					if (hand.get(i).getRank() == hand.get(i - 1).getRank()) {
+						hand.remove(i);
+					}
+
+				}
 
 				// find the longest set
 				// starting point of set
@@ -232,17 +330,11 @@ public class HandEvaluation
 						}
 
 					}
-//
-//					System.out.println("straight was found");
-//					for (Card c : straight) {
-//						System.out.println(c.getName());
-//
-//					}
 					return straight;
 
 				} else {
 					// else, return
-//					System.out.println("No straight found");
+					// System.out.println("No straight found");
 					return null;
 
 				}
@@ -305,4 +397,10 @@ public class HandEvaluation
 				return arrayHand;
 			}
 
+		public static ArrayList<Card> addArrays(ArrayList<Card> bundle1, ArrayList<Card> bundle2){
+				for(Card c: bundle2){
+					bundle1.add(c);
+				}
+				return bundle1;
+		}
 	}
