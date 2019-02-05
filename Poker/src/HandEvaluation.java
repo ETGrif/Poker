@@ -4,7 +4,7 @@ import java.util.Collections;
 public class HandEvaluation
 	{
 
-		public static void evaluate(ArrayList<Card> hand)
+		public static Hand evaluate(ArrayList<Card> hand)
 			{
 
 				String found = null;
@@ -185,12 +185,21 @@ public class HandEvaluation
 				
 				
 
-				System.out.println("\n\n");
-				System.out.println("Found a "+ found);
-				System.out.println("-=-=-=-=-=-=-=-=-=-=-=-");
-				for (Card c : foundCards) {
-					System.out.println(c.getName());
-				}
+//				System.out.println("\n\n");
+//				System.out.println("Found a "+ found);
+//				System.out.println("-=-=-=-=-=-=-=-=-=-=-=-");
+//				for (Card c : foundCards) {
+//					System.out.println(c.getName());
+//				}
+				
+				Hand rankedHand = new Hand(found, foundCards);
+				return rankedHand;
+				
+				
+				
+				
+				
+				
 			}
 
 		public static ArrayList<Card> flushFinder(ArrayList<Card> hand)

@@ -56,4 +56,11 @@ public class Deck
 				
 			}
 
+		public static Card dealTopCard(){
+				Card topCard = deck.get(0);
+				deck.remove(0);
+				return topCard;
+				
+		}
+		
 	}

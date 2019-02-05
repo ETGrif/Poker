@@ -39,12 +39,19 @@ public class TestPlay
 //					}
 //				}
 
-				System.out.println("Cards recieved:");
+				System.out.println("Cards received:");
 				for (Card c : hand) {
 					System.out.println(c.getName());
 				}
 
-				HandEvaluation.evaluate(hand);
+				Hand rankedHand = HandEvaluation.evaluate(hand);
+				
+				System.out.println("\n\n");
+				System.out.println("Found a " + rankedHand.getLabel());
+				System.out.println("-=-=-=-=-=-=-=-=-=-=-=-");
+				for (Card c : rankedHand.getCards()) {
+					System.out.println(c.getName());
+				}
 			}
 		
 }
