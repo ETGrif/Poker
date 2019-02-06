@@ -3,12 +3,14 @@ public class Player
 	{
 
 		private String name;
+		boolean isHuman;
 		private ArrayList<Card> hand;
 		private Hand bestHand;
 		private int money;
 		
-		public Player(String n){
+		public Player(String n , boolean h){
 				name = n;
+				isHuman = h;
 		}
 		
 		
@@ -42,13 +44,21 @@ public class Player
 			{
 				return money;
 			}
+
 		public void setMoney(int money)
 			{
 				this.money = money;
 			}
-		
-		
-		
+
+		public boolean isHuman()
+			{
+				return isHuman;
+			}
+
+		public void setHuman(boolean isHuman)
+			{
+				this.isHuman = isHuman;
+			}
 		
 		
 	}
