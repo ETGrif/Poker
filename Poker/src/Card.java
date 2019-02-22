@@ -1,4 +1,5 @@
-
+import java.util.ArrayList;
+import java.util.Arrays;
 public class Card {
 
 	
@@ -48,8 +49,53 @@ public class Card {
 	}
 	
 	
+	public static void graphicCards(ArrayList<Card> hand){
+			System.out.print(" ");
+			
+			
+			String[] endCaps = {"______ ","       \\","       |","       |"};
+
+			for(int i = 0; i < 3; i++){
+				for(int j = 0; j < hand.size(); j++){
+					String suit = addWhiteSpace(hand.get(j).getSuit());
+					String rank = addWhiteSpace(hand.get(j).getValue());
+					String[] printThings = {"___________","/ "+rank+"    ","| "+suit+" ","|          "};
+					
+					
+					
+					
+					System.out.print(printThings[i]);
+					
+					
+					
+					
+					
+					
+					
+				}
+				System.out.print(endCaps[i]);
+				System.out.println();
+				
+				
+			}
+			
+	}
 	
-	
+		public static String addWhiteSpace(String thing)
+			{
+				String[] strings = { "Spades", "Hearts", "Clubs", "Diamonds",
+						"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen",
+						"King" };
+
+				int index = Arrays.asList(strings).indexOf(thing);
+
+				String[] printables = { "Spades  ", "Hearts  ", "Clubs   ", "Diamonds",
+						"Ace  ", "Two  ", "Three", "Four ", "Five ", "Six  ", "Seven", "Eight", "Nine ", "Ten  ",
+						"Jack ", "Queen", "King " };
+				
+				return printables[index];
+				
+			}
 	
 	
 	

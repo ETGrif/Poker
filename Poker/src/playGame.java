@@ -1,14 +1,20 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class playGame
 	{
 
+		
+		static Scanner userInput = new Scanner(System.in);
 		public static void main(String[] args)
 			{
 				System.out.println("Lets play some Poker!(Texas Hold'em)");
 
-				int mPlayers = 5;
+				
+				
+				
+				int mPlayers = 3;
 				Player[] players = new Player[mPlayers];
 				
 				//create new deck
@@ -20,7 +26,12 @@ public class playGame
 					if(i == 0){
 						human = true;
 					}
-					players[i] = new Player("Player " + (i +1) , human);
+					String[] names = {"Alex","Andrea","Bobby","Briana","Carl","Cathy","Dean","Denice","Ethan","Ethyl",
+							"Fred", "Felisha","Greg","Gienessa", "Hans","Haley","Ian","Isabelle","Jack","Jessica"
+							};
+					int random = (int)(Math.random()*names.length);
+					
+					players[i] = new Player(names[random] , human);
 				}
 				
 				
@@ -37,8 +48,8 @@ public class playGame
 					if (p.isHuman()) {
 						System.out.println("\n");
 						System.out.println(p.getName() + ":");
-						System.out.println(p.getHand().get(0).getName());
-						System.out.println(p.getHand().get(1).getName());
+						
+						Card.graphicCards(p.getHand());
 					}
 				}
 				
@@ -47,13 +58,44 @@ public class playGame
 				
 				//deal in the river
 				ArrayList<Card> river = new ArrayList<Card>();
-				System.out.println("\n\nThe river:");
 				for(int i = 0; i < 5; i++){
 					river.add(Deck.dealTopCard());
 				}
-				for(Card c: river){
-					System.out.println(c.getName());
-				}
+							
+				
+				//print flop
+				System.out.println("\n\nThe flop:");
+				ArrayList<Card> printRiver = new ArrayList<Card>();
+				printRiver.add(river.get(0));
+				printRiver.add(river.get(1));
+				printRiver.add(river.get(2));
+				Card.graphicCards(printRiver);
+				
+				
+				//bet
+				String blank;
+				blank= userInput.nextLine();
+				
+				
+				//print card
+				System.out.println("\n\nThe fourth street:");
+				printRiver.add(river.get(3));
+				Card.graphicCards(printRiver);
+				
+				
+				//bet
+				blank= userInput.nextLine();
+				
+				
+				//print river
+				System.out.println("\n\nThe river:");
+				Card.graphicCards(river);
+				
+				
+				//bet
+				blank= userInput.nextLine();
+				
+				
 				
 				
 				
@@ -78,11 +120,7 @@ public class playGame
 //					System.out.println(p.getBestHand().getLabel() + ": " + p.getBestHand().getHandRank() + "," + p.getBestHand().getHighestCard());
 					System.out.println(p.getBestHand().getLabel());
 
-					for(Card c: p.getBestHand().getCards()){
-						System.out.println(c.getName());
-						
-					}
-					
+					Card.graphicCards(p.getBestHand().getCards());
 					
 				}
 				
@@ -101,7 +139,7 @@ public class playGame
 //				}
 //				
 				
-				System.out.println("The winner is " + sortedPlayers.get(0).getName() + " with a " + sortedPlayers.get(0).getBestHand().getLabel());
+				System.out.println(sortedPlayers.get(0).getName() + " is the winner with a " + sortedPlayers.get(0).getBestHand().getLabel());
 				
 				
 				//repeat
