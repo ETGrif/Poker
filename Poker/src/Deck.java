@@ -63,4 +63,27 @@ public class Deck
 				
 		}
 		
+		public static void printCards(ArrayList<Card> hand) {
+			String suit;
+			String Value;
+			String[] Values = {"Two  ","Three","Four ","Five ","Six  ","Seven","Eight","Nine ","Ten  ","Jack ","Queen","King "};
+			String[] Suits = {"Spades  ","Hearts  ","Clubs   ","Diamonds"};
+			String[] cardPrints = {" ____________","/  XXXXX     ","|  XXXXXXXX  "};
+			String[] CardPrintEndCaps = {" ","\\" ,"|"};
+			
+			
+			 for(int i = 0; i < 3; i++) {
+				 for(int j = 0; i < hand.size(); j++) {
+					 
+					 
+					 
+				 }
+				 
+			 }
+			
+			
+			
+			
+		}
+		
 	}
